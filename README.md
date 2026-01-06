@@ -33,7 +33,7 @@
 
 1. 使用下面的链接直接安装：
    ```bash
-   curl -sSL https://raw.githubusercontent.com/Samuel-0-0/SYNAPSE/main/start.sh | bash
+   curl -sSL https://raw.githubusercontent.com/Samuel-0-0/SYNAPSE/main/synapse.sh | bash
    ```
 
 2. 服务启动后将提供一个访问地址，通过浏览器访问
