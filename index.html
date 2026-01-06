@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>SYNAPSE</title>
+    <link href="https://fonts.proxy.ustclug.org/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <div class="brand-logo">
+            SYNAPSE
+        </div>
+        <div id="connection-status" style="color:var(--danger); font-family: 'Orbitron'; font-size: 12px;">LINK: OFFLINE</div>
+</header>
+
+<div class="container">
+    <div class="sidebar">
+        <input type="text" id="ip" value="192.168.88.20">
+        <button class="btn" id="connect-btn" onclick="connect()">建立隧道连接</button>
+        <div id="side-err" class="error-hint"></div>
+        <button class="btn" id="btn-cpu" onclick="openPanel('cpu')">CPU 核心检查</button>
+        <button class="btn" id="btn-usb" onclick="openPanel('usb')">USB 拓扑检查</button>
+        <button class="btn" id="btn-emmc" onclick="openPanel('emmc')">eMMC 寿命检查</button>
+        <button class="btn" id="btn-can" onclick="openPanel('can')">CANBus 配置</button>
+        <button class="btn" id="btn-git" style="border-color:var(--warn); color:var(--warn)" onclick="openPanel('git')">GitHub 云备份</button>
+    </div>
+
+    <div class="main-view">
+        <div class="panel" id="welcome-panel"></div>
+        <div class="panel" id="panel-cpu"></div>
+
+        <div class="panel" id="panel-usb"></div>
+
+        <div class="panel" id="panel-emmc"></div>
+        <div class="panel" id="panel-can"></div>
+        <div class="panel" id="panel-git"></div>
+    </div>
+</div>
+
+<footer>
+    <span class="brand-version">COPYRIGHT © 2025 SAMUEL-WANG (三木) V1.1.2</span>
+</footer>
+
+<script type="module" src="js/core/app.js"></script>
+</body>
+</html>
