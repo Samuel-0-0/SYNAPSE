@@ -104,6 +104,6 @@ nohup python3 "$BACKEND_DIR/$PY_NAME" > /tmp/synapse.log 2>&1 &
 echo "===================================================="
 echo "▶ 部署成功！"
 echo "▶ 请访问: http://$HOST_IP/synapse/index.html"
-echo "▶ 日志查看: tail -f /tmp/synapse.log"
-echo "▶ 系统重启后服务将会自动停止"
+echo "▶ 实时日志查看: tail -f /tmp/synapse.log"
+echo "▶ 注意: 本次为手动启动，系统重启后需重新运行此脚本"
 echo "===================================================="
