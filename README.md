@@ -31,7 +31,10 @@
 
 ### 安装和运行
 
-1. 使用下面的链接直接安装：
+1. 使用下面的命令：
+
+   ```注：第一次使用会执行安装步骤，系统重启后执行命令则直接启动服务端```
+
    ```bash
    curl -sSL https://raw.githubusercontent.com/Samuel-0-0/SYNAPSE/main/synapse.sh | bash
    ```
@@ -42,13 +45,13 @@
 ## 使用指南
 
 1. **建立连接**:
-   - 在左侧输入目标设备的 IP 地址
+   - 在左侧输入目标设备的 IP 地址（默认已经是当前设备的IP）
    - 点击"建立隧道连接"按钮
-   - 等待连接状态变为 "LINK: ONLINE"
+   - 等待右上角连接状态变为 "LINK: ONLINE"
 
 2. **使用功能面板**:
    - 点击左侧导航按钮切换到相应功能
-   - 每个面板会显示实时数据和配置选项
+   - 每个面板会显示数据和配置选项
 
 3. **故障排除**:
    - 如果连接失败，检查 IP 地址和网络连接
@@ -56,101 +59,37 @@
 
 ## 添加插件功能
 
-项目采用模块化设计，易于添加新功能。每个插件包含 HTML 模板、CSS 样式和 JavaScript 逻辑。
-
-### 创建新插件步骤：
-
-1. **创建模块文件**:
-   在 `js/modules/` 目录下创建新文件，例如 `new-feature.js`
-
-2. **实现插件结构**:
-   ```javascript
-   // 导出 HTML 模板
-   export const newFeaturePanelHTML = `
-   <div class="panel-title">新功能标题</div>
-   <div class="content">
-       <!-- 插件内容 -->
-   </div>
-   `;
-
-   // 导出 CSS 样式
-   export const newFeatureStyles = `
-   .new-feature-class {
-       /* 样式定义 */
-   }
-   `;
-
-   // 导出数据处理函数
-   export function handleNewFeatureData(data) {
-       // 处理从后端接收的数据
-       document.getElementById('new-feature-element').textContent = data.value;
-   }
-   ```
-
-3. **注册插件**:
-   在 `js/core/app.js` 中导入并注册：
-   ```javascript
-   import { handleNewFeatureData, newFeaturePanelHTML, newFeatureStyles } from '../modules/new-feature.js';
-
-   // 在 handleData 函数中添加处理逻辑
-   if(res.type === 'new_feature') {
-       handleNewFeatureData(res.data);
-   }
-
-   // 在初始化时注入样式和 HTML
-   const moduleStyles = ... + newFeatureStyles;
-   document.getElementById('panel-new-feature').innerHTML = newFeaturePanelHTML;
-   ```
-
-4. **添加导航按钮**:
-   在 `index.html` 的 sidebar 中添加按钮：
-   ```html
-   <button class="btn" id="btn-new-feature" onclick="openPanel('new-feature')">新功能</button>
-   ```
-
-5. **添加面板容器**:
-   在 main-view 中添加面板 div：
-   ```html
-   <div class="panel" id="panel-new-feature"></div>
-   ```
-
-6. **后端支持**:
-   在 `app.py` 中添加相应的 WebSocket 消息处理和数据收集逻辑。
-
-### 插件开发最佳实践
-
-- 使用 ES6 模块保持代码组织
-- 遵循现有的命名约定
-- 为新功能添加适当的错误处理
-- 确保样式与整体主题一致
-- 测试在不同屏幕尺寸下的响应性
+项目采用模块化设计，易于添加新功能。每个插件包含 HTML 模板、CSS 样式和 JavaScript 逻辑。</br>
+具体步骤请参考[SYNAPSE 插件开发手册](/PLUGIN_DEVELOPMENT_GUIDE.md)
 
 ## 项目结构
 
 ```
 SYNAPSE/
-├── app.py                 # FastAPI 后端服务器
-├── index.html             # 主页面
+├── synapse.py                   # FastAPI 后端服务器
+├── index.html                   # 主页面
 ├── css/
-│   ├── theme.css          # CSS 变量和主题
-│   └── styles.css         # 组件样式
+│   └── styles.css               # CSS 样式
 ├── js/
 │   ├── core/
-│   │   ├── app.js         # 应用初始化
-│   │   ├── router.js      # 面板路由管理
-│   │   └── ws-manager.js  # WebSocket 连接管理
-│   └── modules/           # 功能插件
-│       ├── cpu-checker.js
-│       ├── usb-checker.js
-│       ├── emmc-checker.js
-│       ├── can-config.js
-│       └── git-backup.js
-└── README.md
+│   │   ├── app.js               # 应用初始化
+│   │   ├── router.js            # 面板路由管理
+│   │   └── ws-manager.js        # WebSocket 连接管理
+│   └── modules/                 # 功能插件
+│       ├── cpu-checker.js       # CPU 核心检查
+│       ├── usb-checker.js       # USB 拓扑分析
+│       ├── emmc-checker.js      # eMMC 寿命检查
+│       ├── can-config.js        # CANBus 配置
+│       └── git-backup.js        # GitHub 云备份
+├── synapse.sh                   # 安装/启动脚本
+├── VERSION                      # 定义版本号
+├── PLUGIN_DEVELOPMENT_GUIDE.md  # 插件开发手册
+└── README.md                    # 说明文档
 ```
 
 ## 自定义主题
 
-可以通过修改 `css/theme.css` 中的 CSS 变量来自定义颜色和样式：
+可以通过修改 `css/styles.css` 中的 CSS 变量来自定义颜色和样式：
 
 ```css
 :root {
